@@ -1,14 +1,24 @@
 import Head from 'next/head'
 import Img from 'next/image'
+import { useEffect, useState } from 'react';
+
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const [menus, setMenus] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/menus').then(data => data.json()).then(items => { setMenus(items) });
+    return () => { }
+  }, [])
   return (
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {menus.map((menu, i) => (<p key={i}>{menu.type}</p>))}
 
       <main className={styles.main}>
         <h1 className={styles.title}>
