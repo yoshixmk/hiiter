@@ -1,16 +1,10 @@
-import Head from 'next/head'
-import Img from 'next/image'
-import { useEffect, useState } from 'react';
+import Head from 'next/head';
+import Img from 'next/image';
 
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css';
 
-export default function Home() {
-  const [menus, setMenus] = useState([]);
+export default function Home({ menus }) {
 
-  useEffect(() => {
-    fetch('/api/menus').then(data => data.json()).then(items => { setMenus(items) });
-    return () => { }
-  }, [])
   return (
     <div className={styles.container}>
       <Head>
@@ -73,4 +67,14 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const menus = await fetch(`${process.env.API_URL}/api/menus`).then(data => data.json());
+
+  return {
+    props: {
+      menus,
+    },
+  }
 }
