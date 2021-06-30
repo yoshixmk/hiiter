@@ -8,20 +8,27 @@ export default function Home({ menus }) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>HIITer</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {menus.map((menu, i) => (<p key={i}>{menu.type}</p>))}
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to HIITer!
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          <code className={styles.code}>Please select menu:</code>
+          <select name="food">
+            {menus.map(({ type, menuNames }, i) => (
+              <optgroup label={type} key={i}>
+                {menuNames.map(({ name }, j) =>
+                  (<option key={j} label={name} value={name}>{name}</option>)
+                )}
+              </optgroup>
+            ))}
+          </select>
         </p>
 
         <div className={styles.grid}>
