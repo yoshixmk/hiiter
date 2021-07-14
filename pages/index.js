@@ -4,6 +4,7 @@ import Img from 'next/image';
 import { MenuSelect } from '@/src/components/MenuSelect.js'
 
 import styles from '../styles/Home.module.css';
+import { training } from "./api/_menus_const";
 
 export default function Home({ menus }) {
 
@@ -53,11 +54,8 @@ export default function Home({ menus }) {
 }
 
 export async function getStaticProps() {
-  const menus = await fetch(`${process.env.API_URL}/api/menus`).then(data => data.json());
-
+  const menus = training;
   return {
-    props: {
-      menus,
-    },
+    props: { menus },
   }
 }
