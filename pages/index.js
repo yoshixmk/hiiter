@@ -3,7 +3,7 @@ import Img from 'next/image';
 
 import { MenuSelect } from '@/src/components/MenuSelect.js'
 
-import { PartSelect } from '../src/components/TypeSelect';
+import { CategorySelect as CategorySelect } from '../src/components/CategorySelect';
 import styles from '../styles/Home.module.css';
 import { training } from "./api/_menus_const";
 
@@ -24,7 +24,7 @@ export default function Home({ menus }) {
 
         <p className={styles.description}>
           <code className={styles.code}>Please select menu:</code>
-          <PartSelect parts={menus} />
+          <CategorySelect categories={menus} />
         </p>
 
         <div className={styles.grid}>
