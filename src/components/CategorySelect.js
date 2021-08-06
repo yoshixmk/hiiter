@@ -6,15 +6,15 @@ export const CategorySelect = ({ categories }) => {
 
   const dispatch = useDispatch()
 
-  const handleUpdate = (category) => {
+  const handleUpdate = (e) => {
     dispatch(
       cycleSlice.actions.updateCycle({
-        category,
+        category: e.target.value
       })
     )
   }
 
-  return (<select name="typeName" onChange={(e) => { console.dir(e); handleUpdate(e.value) }}>
+  return (<select value={categories[0].category} name="typeName" onChange={(e) => { handleUpdate(e) }}>
     {categories.map(({ type: category }, j) =>
       (<option key={j} label={category} value={category}>{category}</option>)
     )}
