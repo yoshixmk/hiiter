@@ -2,7 +2,7 @@ import '../styles/globals.css'
 
 import { Provider } from 'react-redux'
 
-import { useStore } from '../src/store'
+import { useStore } from '../store'
 
 function MyApp({ Component, pageProps }) {
   const store = useStore();
