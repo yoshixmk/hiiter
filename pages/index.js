@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import Img from 'next/image';
 
-import { MenuSelect } from '@/src/components/MenuSelect.js'
-
 import { CategorySelect as CategorySelect } from '../src/components/CategorySelect';
+import { MenuSelect } from '../src/components/MenuSelect.js'
 import styles from '../styles/Home.module.css';
 import { training } from "./api/_menus_const";
 

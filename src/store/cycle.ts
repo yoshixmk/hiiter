@@ -13,7 +13,7 @@ export type AddHistoryPayload = string
 
 const initialState: CycleState = {
   cycle: {
-    category: null,
+    category: '胸',
   },
 }
 
