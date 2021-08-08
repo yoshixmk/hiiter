@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
-
-import { cycleSlice } from '../store/cycle';
+import { cycleSlice } from 'store/cycle';
 
 export const CategorySelect = ({ categories }) => {
   const dispatch = useDispatch();
