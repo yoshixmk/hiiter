@@ -18,7 +18,10 @@
 
 .footer {
   width: 100%;
-  height: 198px;
+  height: 3em;
+}
+
+.footer a {
   display: flex;
   justify-content: center;
   align-items: center;
