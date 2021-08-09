@@ -1,5 +1,5 @@
 import { CategorySelect as CategorySelect } from 'components/CategorySelect';
-import { MenuSelect } from 'components/MenuSelect.js';
+import { MenuSelect } from 'components/MenuSelect';
 import { Timer } from 'components/Timer';
 import { training } from 'domains/const/menus_const';
 import Head from 'next/head';
