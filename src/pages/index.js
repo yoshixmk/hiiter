@@ -26,9 +26,7 @@ export default function Home({ menus }) {
         <div className={styles.grid}>
           {[...Array(4).keys()].map((i) => (
             <div key={i} href="https://nextjs.org/docs" className={styles.card}>
-              <h3>Menu {i} &rarr;</h3>
-              <p>subtext</p>
-              <MenuSelect menus={menus} name={`menu${i}`} />
+              <MenuSelect menus={menus} name={`Menu ${i + 1}`} />
             </div>
           ))}
         </div>
