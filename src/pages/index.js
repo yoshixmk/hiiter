@@ -8,8 +8,6 @@ import { DiGithubBadge } from "react-icons/di";
 import styles from 'styles/Home.module.css';
 
 export default function Home({ menus }) {
-  const time = new Date();
-  time.setSeconds(time.getSeconds() + 240); // 4 minutes timer
   return (
     <div className={styles.container}>
       <Head>
@@ -35,7 +33,7 @@ export default function Home({ menus }) {
           ))}
         </div>
 
-        <Timer expiryTimestamp={time} />
+        <Timer />
       </main>
 
       <footer className={styles.footer}>

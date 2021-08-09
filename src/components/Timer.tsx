@@ -1,39 +1,57 @@
 import React from "react";
+import { useState } from "react";
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
+import { CgFormatSlash } from "react-icons/cg";
+import { RiPauseCircleLine, RiPlayCircleLine, RiStopCircleLine } from "react-icons/ri";
 import { useTimer } from "react-timer-hook";
 
-// @see https://github.com/amrlabib/react-timer-hook#example
-
-export function Timer({ expiryTimestamp }: { expiryTimestamp: number }) {
+export function Timer() {
+  const BASE_TIME = 240_000;
+  const [expiryMilliSeconds, setExpiryMilliSeconds] = useState(BASE_TIME); // 4 minutes timer
   const {
     seconds,
     minutes,
-    hours,
-    days,
+    // hours,
+    // days,
     isRunning,
     start,
     pause,
-    resume,
+    // resume,
     restart,
   } = useTimer({
-    expiryTimestamp,
+    autoStart: false,
+    expiryTimestamp: new Date().getTime() + BASE_TIME,
     onExpire: () => console.warn("onExpire called"),
   });
+
+  const leftFill = (num, targetLength = 2) => {
+    return num.toString().padStart(targetLength, 0);
+  }
 
   return (
     <div style={{ textAlign: 'center' }}>
       <div style={{ fontSize: '100px' }}>
-        <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+        <span>{leftFill(minutes)}</span>:<span>{leftFill(seconds)}</span>
       </div>
-      <p>{isRunning ? 'Running' : 'Not running'}</p>
-      <button onClick={start}>Start</button>
-      <button onClick={pause}>Pause</button>
-      <button onClick={resume}>Resume</button>
-      <button onClick={() => {
+      <RiPlayCircleLine size="3em" {...(isRunning && { color: "lightseagreen" })} onClick={start} />
+      <RiPauseCircleLine size="3em" {...(!isRunning && { color: "darkorange" })} onClick={pause} />
+      <RiStopCircleLine size="3em" onClick={() => {
         // Restarts to 4 minutes timer
-        const time = new Date();
-        time.setSeconds(time.getSeconds() + 240);
-        restart(time.getTime())
-      }}>Restart</button>
+        restart(new Date().getTime() + expiryMilliSeconds, false);
+      }} />
+      <CgFormatSlash size="3em" />
+      <AiOutlineMinusCircle size="3em" onClick={() => {
+        const next = expiryMilliSeconds - BASE_TIME;
+        if (next <= 0) return;
+        restart(new Date().getTime() + next, false);
+        setExpiryMilliSeconds(next)
+      }} />
+      <AiOutlinePlusCircle size="3em" onClick={() => {
+        const next = expiryMilliSeconds + BASE_TIME;
+        if (next >= 3600_000) return; // upper 1 hour
+        restart(new Date().getTime() + next, false);
+        setExpiryMilliSeconds(next)
+      }} />
     </div>
   );
 }
