@@ -20,15 +20,20 @@ export const MenuSelect = ({ menus, name }) => {
   return (
     <>
       <h3>{displayName} &rarr;</h3>
-      <select name={displayName} onChange={(e) => {
-        handleUpdate(e);
-      }}>
+      <select
+        name={displayName}
+        onChange={(e) => {
+          handleUpdate(e);
+        }}
+      >
         {selector.menuNames.map((menu, i) => {
           const { name } = menu;
           // console.dir(menu)
-          return (<option key={i} label={name} value={JSON.stringify(menu)}>
-            {name}
-          </option>);
+          return (
+            <option key={i} label={name} value={JSON.stringify(menu)}>
+              {name}
+            </option>
+          );
         })}
       </select>
       <p>{state.subtext}</p>

@@ -3,8 +3,8 @@ import { MenuSelect } from 'components/MenuSelect';
 import { Timer } from 'components/Timer';
 import { training } from 'domains/const/menus_const';
 import Head from 'next/head';
-import Image from 'next/image'
-import { DiGithubBadge } from "react-icons/di";
+import Image from 'next/image';
+import { DiGithubBadge } from 'react-icons/di';
 import styles from 'styles/Home.module.css';
 
 export default function Home({ menus }) {
@@ -37,7 +37,12 @@ export default function Home({ menus }) {
       <footer className={styles.footer}>
         <a href="https://github.com/yoshixmk/hiiter" target="_blank" rel="noreferrer">
           <DiGithubBadge size="3em" />
-          <Image alt="GitHub stars" src="https://img.shields.io/github/stars/yoshixmk/hiiter?style=social" height="20" width="76" />
+          <Image
+            alt="GitHub stars"
+            src="https://img.shields.io/github/stars/yoshixmk/hiiter?style=social"
+            height="20"
+            width="76"
+          />
         </a>
       </footer>
     </div>
