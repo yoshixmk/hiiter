@@ -99,20 +99,13 @@ export const training = [
   {
     type: 'ダイナミック',
     menuNames: [
-      { name: 'プッシュアップジャンプ', subtext: '' },
-      { name: 'スーパーマンジャンプ', subtext: '' },
-      { name: 'スクワットジャンプ', subtext: '' },
-      { name: 'フライングスプリット', subtext: '' },
-      { name: 'ブルガリアン・スクワットジャンプ', subtext: '' },
-      { name: '連続サイドジャンプ', subtext: '' },
-      { name: 'バウンスジャンプ', subtext: '' },
-      { name: '片脚連続ジャンプ', subtext: '' },
+      { name: 'プッシュアップジャンプ', subtext: '腕立て伏せした後にジャンプします' },
+      { name: 'スーパーマンジャンプ', subtext: '腕立て跳びです' },
+      { name: 'スクワットジャンプ', subtext: 'スクワットの勢いでジャンプします' },
+      { name: 'フライングスプリット', subtext: 'スプリット姿勢からジャンプの際に足を前後入れ替えます' },
+      { name: 'サイドジャンプ', subtext: '横にジャンプして片足立ちを繰り返します' },
+      { name: '片脚ジャンプ', subtext: '可能な限り足を上げ、片足でジャンプを交互にします' },
+      { name: 'バービー', subtext: 'バービーです' },
     ],
-  },
-];
-export const hiit = [
-  {
-    type: '全身',
-    menuNames: [{ name: 'バービー', subtext: '' }],
   },
 ];
