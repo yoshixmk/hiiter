@@ -1,7 +1,6 @@
 import { CategorySelect as CategorySelect } from 'components/CategorySelect';
 import { MenuSelect } from 'components/MenuSelect';
 import { Timer } from 'components/Timer';
-import { training } from 'domains/const/menus_const';
 import Head from 'next/head';
 import Image from 'next/image';
 import { DiGithubBadge } from 'react-icons/di';
@@ -50,7 +49,8 @@ export default function Home({ menus }) {
 }
 
 export async function getStaticProps() {
-  const menus = training;
+  const res = await fetch(`${process.env.API_URL}/trainings/menus`)
+  const menus = await res.json();
   return {
     props: { menus },
   };
