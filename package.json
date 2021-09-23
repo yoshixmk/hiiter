@@ -12,25 +12,25 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.6.1",
-    "next": "11.0.1",
+    "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "4.2.0",
-    "react-redux": "7.2.4",
-    "react-timer-hook": "3.0.4"
+    "react-redux": "7.2.5",
+    "react-timer-hook": "3.0.5"
   },
   "devDependencies": {
-    "@types/react": "17.0.15",
+    "@types/react": "17.0.24",
     "@types/react-redux": "7.1.18",
-    "@typescript-eslint/eslint-plugin": "4.28.4",
-    "@typescript-eslint/parser": "4.28.4",
-    "eslint": "7.31.0",
-    "eslint-config-next": "11.0.1",
+    "@typescript-eslint/eslint-plugin": "4.31.2",
+    "@typescript-eslint/parser": "4.31.2",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
     "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-import": "2.23.4",
-    "eslint-plugin-react": "7.24.0",
+    "eslint-plugin-import": "2.24.2",
+    "eslint-plugin-react": "7.26.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
-    "prettier": "2.3.2",
-    "typescript": "4.3.5"
+    "prettier": "2.4.1",
+    "typescript": "4.4.3"
   }
 }
