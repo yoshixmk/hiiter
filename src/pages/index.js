@@ -4,9 +4,13 @@ import { Timer } from 'components/Timer';
 import Head from 'next/head';
 import Image from 'next/image';
 import { DiGithubBadge } from 'react-icons/di';
+import { useSelector } from 'react-redux';
 import styles from 'styles/Home.module.css';
 
 export default function Home({ menus }) {
+
+  const { positionNumber } = useSelector((state) => state.focus);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -24,7 +28,7 @@ export default function Home({ menus }) {
 
         <div className={styles.grid}>
           {[...Array(4).keys()].map((i) => (
-            <div key={i} href="https://nextjs.org/docs" className={styles.card}>
+            <div key={i} href="https://nextjs.org/docs" className={styles.card} style={positionNumber == (i + 1) ? { "background-color": "pink" } : {}}>
               <MenuSelect menus={menus} name={`Menu ${i + 1}`} />
             </div>
           ))}

@@ -3,28 +3,30 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export type Cycle = {
   category: string | null;
 };
-
-export type CycleState = {
-  cycle: Cycle;
+export type Focus = {
+  positionNumber: number;
 };
 
-export type UpdateCyclePayload = Cycle;
-export type AddHistoryPayload = string;
-
-const initialState: CycleState = {
+const initialState: { cycle: Cycle, focus: Focus } = {
   cycle: {
     category: '胸',
   },
+  focus: {
+    positionNumber: 1,
+  }
 };
 
 export const cycleSlice = createSlice({
   name: 'Cycle',
   initialState,
   reducers: {
-    updateCycle(state, action: PayloadAction<UpdateCyclePayload>) {
+    updateCycle(state, action: PayloadAction<Cycle>) {
       state.cycle = action.payload;
     },
-    reset(): CycleState {
+    updateFocus(state, action: PayloadAction<Focus>) {
+      state.focus = action.payload;
+    },
+    reset() {
       return initialState;
     },
   },

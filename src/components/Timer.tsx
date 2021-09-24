@@ -1,13 +1,16 @@
 import React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai';
 import { CgFormatSlash } from 'react-icons/cg';
 import { RiPauseCircleLine, RiPlayCircleLine, RiStopCircleLine } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
+import { cycleSlice } from 'store/cycle';
 
 export function Timer() {
   const BASE_TIME = 240_000;
   const [expiryMilliSeconds, setExpiryMilliSeconds] = useState(BASE_TIME); // 4 minutes timer
+
   const {
     seconds,
     minutes,
@@ -20,9 +23,24 @@ export function Timer() {
     restart,
   } = useTimer({
     autoStart: false,
-    expiryTimestamp: new Date().getTime() + BASE_TIME,
+    expiryTimestamp: new Date(new Date().getTime() + BASE_TIME),
     onExpire: () => console.warn('onExpire called'),
   });
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const remaining = seconds + 60 * minutes;
+    const positionNumber = Math.floor((expiryMilliSeconds - remaining) / 30 % 4) + 1
+
+    const handleUpdate = (positionNumber) => {
+      dispatch(
+        cycleSlice.actions.updateFocus({
+          positionNumber,
+        })
+      );
+    };
+    handleUpdate(positionNumber);
+  }, [expiryMilliSeconds, minutes, seconds, dispatch])
 
   const leftFill = (num, targetLength = 2) => {
     return num.toString().padStart(targetLength, 0);
@@ -39,7 +57,7 @@ export function Timer() {
         size="3em"
         onClick={() => {
           // Restarts to 4 minutes timer
-          restart(new Date().getTime() + expiryMilliSeconds, false);
+          restart(new Date(new Date().getTime() + expiryMilliSeconds), false);
         }}
       />
       <CgFormatSlash size="3em" />
@@ -48,7 +66,7 @@ export function Timer() {
         onClick={() => {
           const next = expiryMilliSeconds - BASE_TIME;
           if (next <= 0) return;
-          restart(new Date().getTime() + next, false);
+          restart(new Date(new Date().getTime() + next), false);
           setExpiryMilliSeconds(next);
         }}
       />
@@ -57,7 +75,7 @@ export function Timer() {
         onClick={() => {
           const next = expiryMilliSeconds + BASE_TIME;
           if (next >= 3600_000) return; // upper 1 hour
-          restart(new Date().getTime() + next, false);
+          restart(new Date(new Date().getTime() + next), false);
           setExpiryMilliSeconds(next);
         }}
       />
