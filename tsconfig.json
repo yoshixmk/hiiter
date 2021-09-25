@@ -2,13 +2,12 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "*": ["/*"]
+      "@/*": ["/*"]
     },
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
@@ -18,8 +17,10 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "allowJs": true,
+    "downlevelIteration": true
   },
-  "include": ["next-env.d.ts", "**/*.tsx?"],
+  "include": ["next-env.d.ts", "**/*.tsx?", "src/**/*"],
   "exclude": ["node_modules"]
 }

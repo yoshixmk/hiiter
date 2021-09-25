@@ -7,13 +7,13 @@ export type Focus = {
   positionNumber: number;
 };
 
-const initialState: { cycle: Cycle, focus: Focus } = {
+const initialState: { cycle: Cycle; focus: Focus } = {
   cycle: {
     category: '胸',
   },
   focus: {
     positionNumber: 1,
-  }
+  },
 };
 
 export const cycleSlice = createSlice({

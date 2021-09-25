@@ -1,7 +1,11 @@
 import { useDispatch } from 'react-redux';
-import { cycleSlice } from 'store/cycle';
 
-export const CategorySelect = ({ categories }) => {
+import { Menus } from '../pages';
+import { cycleSlice } from '../store/cycle';
+
+type Categories = Menus;
+
+export const CategorySelect = ({ categories }: { categories: Categories }): JSX.Element => {
   const dispatch = useDispatch();
 
   const handleUpdate = (e) => {
@@ -14,7 +18,7 @@ export const CategorySelect = ({ categories }) => {
 
   return (
     <select
-      value={categories[0].category}
+      value={categories[0].type}
       name="typeName"
       onChange={(e) => {
         handleUpdate(e);

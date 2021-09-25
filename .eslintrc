@@ -1,13 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "simple-import-sort", "import"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    // "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "next"
-  ],
+  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier", "next"],
   "env": {
     "es6": true,
     "browser": true,

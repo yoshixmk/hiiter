@@ -1,15 +1,28 @@
-import { CategorySelect as CategorySelect } from 'components/CategorySelect';
-import { MenuSelect } from 'components/MenuSelect';
-import { Timer } from 'components/Timer';
 import Head from 'next/head';
 import Image from 'next/image';
 import { DiGithubBadge } from 'react-icons/di';
 import { useSelector } from 'react-redux';
-import styles from 'styles/Home.module.css';
 
-export default function Home({ menus }) {
+import { CategorySelect } from '../components/CategorySelect';
+import { MenuSelect } from '../components/MenuSelect';
+import { Timer } from '../components/Timer';
+import { Focus } from '../store/cycle';
+import styles from '../styles/Home.module.css';
 
-  const { positionNumber } = useSelector((state) => state.focus);
+export type Menus = [
+  {
+    type: string;
+    menuNames: [
+      {
+        name: string;
+        subtext: string;
+      }
+    ];
+  }
+];
+
+export default function Home({ menus }: { menus: Menus }): JSX.Element {
+  const { positionNumber } = useSelector((state: { focus: Focus }) => state.focus);
 
   return (
     <div className={styles.container}>
@@ -28,7 +41,10 @@ export default function Home({ menus }) {
 
         <div className={styles.grid}>
           {[...Array(4).keys()].map((i) => (
-            <div key={i} href="https://nextjs.org/docs" className={styles.card} style={positionNumber == (i + 1) ? { "background-color": "pink" } : {}}>
+            <div
+              key={i}
+              className={`${styles.card} ${positionNumber == i + 1 ? styles.highlight : {}}`}
+            >
               <MenuSelect menus={menus} name={`Menu ${i + 1}`} />
             </div>
           ))}
@@ -52,9 +68,9 @@ export default function Home({ menus }) {
   );
 }
 
-export async function getStaticProps() {
-  const res = await fetch(`${process.env.API_URL}/trainings/menus`)
-  const menus = await res.json();
+export async function getStaticProps(): Promise<{ props: { menus: Menus } }> {
+  const res = await fetch(`${process.env.API_URL}/trainings/menus`);
+  const menus: Menus = await res.json();
   return {
     props: { menus },
   };

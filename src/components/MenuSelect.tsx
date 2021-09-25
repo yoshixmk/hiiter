@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-export const MenuSelect = ({ menus, name }) => {
+import { Menus } from '../pages';
+import { Cycle } from '../store/cycle';
+
+type MenusWithName = {
+  menus: Menus;
+  name: string;
+};
+
+export const MenuSelect = ({ menus, name }: MenusWithName): JSX.Element => {
   const displayName = name;
-  const { category } = useSelector((state) => state.cycle);
+  const { category } = useSelector((state: { cycle: Cycle }) => state.cycle);
 
   const menuNames = menus.filter((c) => c.type === category)[0].menuNames;
   const [selector, setSelector] = useState({ type: category, menuNames });

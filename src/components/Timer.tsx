@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { cycleSlice } from 'store/cycle';
 
-export function Timer() {
+export function Timer(): JSX.Element {
   const BASE_TIME = 240_000;
   const [expiryMilliSeconds, setExpiryMilliSeconds] = useState(BASE_TIME); // 4 minutes timer
 
@@ -30,7 +30,7 @@ export function Timer() {
   const dispatch = useDispatch();
   useEffect(() => {
     const remaining = seconds + 60 * minutes;
-    const positionNumber = Math.floor((expiryMilliSeconds - remaining) / 30 % 4) + 1
+    const positionNumber = Math.floor(((expiryMilliSeconds - remaining) / 30) % 4) + 1;
 
     const handleUpdate = (positionNumber) => {
       dispatch(
@@ -40,7 +40,7 @@ export function Timer() {
       );
     };
     handleUpdate(positionNumber);
-  }, [expiryMilliSeconds, minutes, seconds, dispatch])
+  }, [expiryMilliSeconds, minutes, seconds, dispatch]);
 
   const leftFill = (num, targetLength = 2) => {
     return num.toString().padStart(targetLength, 0);
