@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { CategorySelect } from '../components/CategorySelect';
 import { MenuSelect } from '../components/MenuSelect';
 import { Timer } from '../components/Timer';
+import { YoutubeVideoModal } from '../components/YoutubeVideoModal';
 import { Focus } from '../store/cycle';
 import styles from '../styles/Home.module.css';
 
@@ -32,7 +33,7 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to HIITer!</h1>
+        <h1 className={styles.title}>HIITer</h1>
 
         <p className={styles.description}>
           <code className={styles.code}>Please select menu:</code>
@@ -50,7 +51,10 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
           ))}
         </div>
 
-        <Timer />
+        <div className={styles.grid}>
+          <Timer />
+          <YoutubeVideoModal videoId="g46tZN9J_2k" start={10} />
+        </div>
       </main>
 
       <footer className={styles.footer}>

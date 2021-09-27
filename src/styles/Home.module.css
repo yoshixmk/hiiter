@@ -30,6 +30,7 @@
 .title a {
   color: #0070f3;
   text-decoration: none;
+  margin: 0;
 }
 
 .title a:hover,
@@ -50,6 +51,7 @@
 }
 
 .description {
+  margin: 0;
   line-height: 1.5;
   font-size: 1.5rem;
 }
@@ -98,7 +100,7 @@
 
 .card p {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 0.8rem;
   line-height: 1.5;
 }
 
