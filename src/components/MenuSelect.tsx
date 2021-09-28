@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Menus } from '../pages';
+import { Menu, Menus } from '../pages';
 import { Cycle } from '../store/cycle';
 
-type MenusWithName = {
+type Props = {
   menus: Menus;
   name: string;
+  onSelect: (menu: Menu) => void;
 };
 
-export const MenuSelect = ({ menus, name }: MenusWithName): JSX.Element => {
+export const MenuSelect = ({ menus, name, onSelect }: Props): JSX.Element => {
   const displayName = name;
   const { category } = useSelector((state: { cycle: Cycle }) => state.cycle);
 
@@ -22,7 +23,9 @@ export const MenuSelect = ({ menus, name }: MenusWithName): JSX.Element => {
   const [state, setState] = useState(selector.menuNames[0]);
 
   const handleUpdate = (e) => {
-    setState(JSON.parse(e.target.value));
+    const menu = JSON.parse(e.target.value);
+    setState(menu);
+    onSelect(menu);
   };
 
   return (

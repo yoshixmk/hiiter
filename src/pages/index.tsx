@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { useState } from 'react';
 import { DiGithubBadge } from 'react-icons/di';
 import { useSelector } from 'react-redux';
 
@@ -10,20 +11,28 @@ import { YoutubeVideoModal } from '../components/YoutubeVideoModal';
 import { Focus } from '../store/cycle';
 import styles from '../styles/Home.module.css';
 
+export type Menu = {
+  name: string;
+  subtext: string;
+  videoId?: string;
+  start?: number;
+};
+
 export type Menus = [
   {
     type: string;
-    menuNames: [
-      {
-        name: string;
-        subtext: string;
-      }
-    ];
+    menuNames: Menu[];
   }
 ];
 
 export default function Home({ menus }: { menus: Menus }): JSX.Element {
   const { positionNumber } = useSelector((state: { focus: Focus }) => state.focus);
+  const [selectedMenus, setSelectedMenus] = useState([]);
+
+  const onSelectMenu = (positionNumber: number) => (menu: Menu) => {
+    selectedMenus[positionNumber] = menu;
+    setSelectedMenus([...selectedMenus]);
+  };
 
   return (
     <div className={styles.container}>
@@ -42,11 +51,8 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
 
         <div className={styles.grid}>
           {[...Array(4).keys()].map((i) => (
-            <div
-              key={i}
-              className={`${styles.card} ${positionNumber == i + 1 ? styles.highlight : {}}`}
-            >
-              <MenuSelect menus={menus} name={`Menu ${i + 1}`} />
+            <div key={i} className={`${styles.card} ${positionNumber == i + 1 ? styles.highlight : {}}`}>
+              <MenuSelect menus={menus} name={`Menu ${i + 1}`} onSelect={onSelectMenu(i)} />
             </div>
           ))}
         </div>
