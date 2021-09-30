@@ -1,26 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 
-import { Menu, Menus } from '../pages';
-import { Cycle } from '../store/cycle';
+import { Menu } from '../pages';
+
 
 type Props = {
-  menus: Menus;
+  filteredMenus: Menu[];
   name: string;
   onSelect: (menu: Menu) => void;
 };
 
-export const MenuSelect = ({ menus, name, onSelect }: Props): JSX.Element => {
+export const MenuSelect = ({ filteredMenus, name, onSelect }: Props): JSX.Element => {
   const displayName = name;
-  const { category } = useSelector((state: { cycle: Cycle }) => state.cycle);
-
-  const menuNames = menus.filter((c) => c.type === category)[0].menuNames;
-  const [selector, setSelector] = useState({ type: category, menuNames });
-  useEffect(() => {
-    const [s] = menus.filter((c) => c.type === category);
-    setSelector(s);
-  }, [category, menus]);
-  const [state, setState] = useState(selector.menuNames[0]);
+  const [state, setState] = useState(filteredMenus[0]);
 
   const handleUpdate = (e) => {
     const menu = JSON.parse(e.target.value);
@@ -37,9 +28,8 @@ export const MenuSelect = ({ menus, name, onSelect }: Props): JSX.Element => {
           handleUpdate(e);
         }}
       >
-        {selector.menuNames.map((menu, i) => {
+        {filteredMenus.map((menu, i) => {
           const { name } = menu;
-          // console.dir(menu)
           return (
             <option key={i} label={name} value={JSON.stringify(menu)}>
               {name}

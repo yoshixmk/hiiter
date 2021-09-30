@@ -36,11 +36,12 @@ export function Timer(): JSX.Element {
       dispatch(
         cycleSlice.actions.updateFocus({
           positionNumber,
+          isRunning,
         })
       );
     };
     handleUpdate(positionNumber);
-  }, [expiryMilliSeconds, minutes, seconds, dispatch]);
+  }, [expiryMilliSeconds, minutes, seconds, dispatch, isRunning]);
 
   const leftFill = (num, targetLength = 2) => {
     return num.toString().padStart(targetLength, 0);

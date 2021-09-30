@@ -9,6 +9,7 @@ import { MenuSelect } from '../components/MenuSelect';
 import { Timer } from '../components/Timer';
 import { YoutubeVideoModal } from '../components/YoutubeVideoModal';
 import { Focus } from '../store/cycle';
+import { Cycle } from '../store/cycle';
 import styles from '../styles/Home.module.css';
 
 export type Menu = {
@@ -26,13 +27,16 @@ export type Menus = [
 ];
 
 export default function Home({ menus }: { menus: Menus }): JSX.Element {
-  const { positionNumber } = useSelector((state: { focus: Focus }) => state.focus);
+  const { positionNumber, isRunning } = useSelector((state: { focus: Focus }) => state.focus);
   const [selectedMenus, setSelectedMenus] = useState([]);
 
   const onSelectMenu = (positionNumber: number) => (menu: Menu) => {
     selectedMenus[positionNumber] = menu;
     setSelectedMenus([...selectedMenus]);
   };
+
+  const { category } = useSelector((state: { cycle: Cycle }) => state.cycle);
+  const filteredMenus = menus.filter((c) => c.type === category)[0].menuNames;
 
   return (
     <div className={styles.container}>
@@ -52,14 +56,16 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
         <div className={styles.grid}>
           {[...Array(4).keys()].map((i) => (
             <div key={i} className={`${styles.card} ${positionNumber == i + 1 ? styles.highlight : {}}`}>
-              <MenuSelect menus={menus} name={`Menu ${i + 1}`} onSelect={onSelectMenu(i)} />
+              <MenuSelect filteredMenus={filteredMenus} name={`Menu ${i + 1}`} onSelect={onSelectMenu(i)} />
             </div>
           ))}
         </div>
 
         <div className={styles.grid}>
           <Timer />
-          <YoutubeVideoModal videoId="g46tZN9J_2k" start={10} />
+          {
+            isRunning && <YoutubeVideoModal videoId={selectedMenus[positionNumber - 1]?.videoId} start={selectedMenus[positionNumber - 1]?.start} />
+          }
         </div>
       </main>
 
