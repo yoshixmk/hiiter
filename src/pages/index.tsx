@@ -68,7 +68,7 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
         <div className={styles.grid}>
           <Timer />
           {
-            isRunning ? <YoutubeVideoModal videoId={selectedMenus[positionNumber - 1]?.videoId} start={selectedMenus[positionNumber - 1]?.start} /> : <p>動画がありません</p>
+            isRunning ? <YoutubeVideoModal videoId={selectedMenus[positionNumber - 1]?.videoId} start={selectedMenus[positionNumber - 1]?.start} /> : <p>再生してプレビューしてください</p>
           }
         </div>
       </main>

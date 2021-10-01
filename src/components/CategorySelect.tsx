@@ -1,12 +1,14 @@
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Menus } from '../pages';
-import { cycleSlice } from '../store/cycle';
+import { Cycle, cycleSlice } from '../store/cycle';
 
 type Categories = Menus;
 
 export const CategorySelect = ({ categories }: { categories: Categories }): JSX.Element => {
   const dispatch = useDispatch();
+  const { category } = useSelector((state: { cycle: Cycle }) => state.cycle);
 
   const handleUpdate = (e) => {
     dispatch(
@@ -18,7 +20,7 @@ export const CategorySelect = ({ categories }: { categories: Categories }): JSX.
 
   return (
     <select
-      value={categories[0].type}
+      value={category ?? categories[0].type}
       name="typeName"
       onChange={(e) => {
         handleUpdate(e);
