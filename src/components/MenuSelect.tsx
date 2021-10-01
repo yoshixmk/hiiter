@@ -5,13 +5,13 @@ import { Menu } from '../pages';
 
 type Props = {
   filteredMenus: Menu[];
-  name: string;
+  index: number;
   onSelect: (menu: Menu) => void;
 };
 
-export const MenuSelect = ({ filteredMenus, name, onSelect }: Props): JSX.Element => {
-  const displayName = name;
-  const [state, setState] = useState(filteredMenus[0]);
+export const MenuSelect = ({ filteredMenus, index, onSelect }: Props): JSX.Element => {
+  const displayName = `Menu ${index + 1}`;
+  const [state, setState] = useState(filteredMenus[index]);
 
   const handleUpdate = (e) => {
     const menu = JSON.parse(e.target.value);

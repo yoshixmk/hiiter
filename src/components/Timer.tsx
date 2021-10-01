@@ -48,7 +48,7 @@ export function Timer(): JSX.Element {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center', marginRight: '2rem' }}>
       <div style={{ fontSize: '100px' }}>
         <span>{leftFill(minutes)}</span>:<span>{leftFill(seconds)}</span>
       </div>

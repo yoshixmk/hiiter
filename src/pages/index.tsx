@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DiGithubBadge } from 'react-icons/di';
 import { useSelector } from 'react-redux';
 
@@ -30,13 +30,17 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
   const { positionNumber, isRunning } = useSelector((state: { focus: Focus }) => state.focus);
   const [selectedMenus, setSelectedMenus] = useState([]);
 
+  const { category } = useSelector((state: { cycle: Cycle }) => state.cycle);
+  const filteredMenus = menus.filter((c) => c.type === category)[0].menuNames;
+
+  useEffect(() => {
+    setSelectedMenus(filteredMenus);
+  }, [filteredMenus])
+
   const onSelectMenu = (positionNumber: number) => (menu: Menu) => {
     selectedMenus[positionNumber] = menu;
     setSelectedMenus([...selectedMenus]);
   };
-
-  const { category } = useSelector((state: { cycle: Cycle }) => state.cycle);
-  const filteredMenus = menus.filter((c) => c.type === category)[0].menuNames;
 
   return (
     <div className={styles.container}>
@@ -56,7 +60,7 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
         <div className={styles.grid}>
           {[...Array(4).keys()].map((i) => (
             <div key={i} className={`${styles.card} ${positionNumber == i + 1 ? styles.highlight : {}}`}>
-              <MenuSelect filteredMenus={filteredMenus} name={`Menu ${i + 1}`} onSelect={onSelectMenu(i)} />
+              <MenuSelect filteredMenus={filteredMenus} index={i} onSelect={onSelectMenu(i)} />
             </div>
           ))}
         </div>
@@ -64,7 +68,7 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
         <div className={styles.grid}>
           <Timer />
           {
-            isRunning && <YoutubeVideoModal videoId={selectedMenus[positionNumber - 1]?.videoId} start={selectedMenus[positionNumber - 1]?.start} />
+            isRunning ? <YoutubeVideoModal videoId={selectedMenus[positionNumber - 1]?.videoId} start={selectedMenus[positionNumber - 1]?.start} /> : <p>動画がありません</p>
           }
         </div>
       </main>
