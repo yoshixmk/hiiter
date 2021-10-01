@@ -6,7 +6,7 @@ type Props = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const YoutubeVideoModal = ({ videoId, start }: Props): JSX.Element => {
   if (!videoId || !start) {
-    return (<></>);
+    return <></>;
   }
   return (
     <iframe

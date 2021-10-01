@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import { Menu } from '../pages';
 
-
 type Props = {
   filteredMenus: Menu[];
   index: number;
