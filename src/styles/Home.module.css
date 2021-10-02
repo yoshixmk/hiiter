@@ -115,8 +115,16 @@
   background-color: pink;
 }
 
-.logo {
-  height: 1em;
+.overlay {
+  position: fixed;
+  top: -8rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 28rem;
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 600px) {

@@ -6,6 +6,7 @@ export type Cycle = {
 export type Focus = {
   positionNumber: number;
   isRunning: boolean;
+  remainingCount: number;
 };
 
 const initialState: { cycle: Cycle; focus: Focus } = {
@@ -15,6 +16,7 @@ const initialState: { cycle: Cycle; focus: Focus } = {
   focus: {
     positionNumber: 1,
     isRunning: false,
+    remainingCount: null,
   },
 };
 

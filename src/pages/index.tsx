@@ -5,12 +5,14 @@ import { DiGithubBadge } from 'react-icons/di';
 import { useSelector } from 'react-redux';
 
 import { CategorySelect } from '../components/CategorySelect';
+import { CountDownOverlay } from '../components/CountDownOverlay';
 import { MenuSelect } from '../components/MenuSelect';
 import { Timer } from '../components/Timer';
 import { YoutubeVideoModal } from '../components/YoutubeVideoModal';
-import { Focus } from '../store/cycle';
-import { Cycle } from '../store/cycle';
+import { Cycle, Focus } from '../store/cycle';
 import styles from '../styles/Home.module.css';
+
+
 
 export type Menu = {
   name: string;
@@ -89,6 +91,7 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
           />
         </a>
       </footer>
+      {/* <CountDownOverlay /> */}
     </div>
   );
 }

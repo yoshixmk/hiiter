@@ -28,15 +28,20 @@ export function Timer(): JSX.Element {
   });
 
   const dispatch = useDispatch();
+  const INTERVAL = 30;
   useEffect(() => {
-    const remaining = seconds + 60 * minutes;
-    const positionNumber = Math.floor(((expiryMilliSeconds - remaining) / 30) % 4) + 1;
+    const timeLeft = seconds + 60 * minutes;
+    // time left in one training-set
+    const remainingCount = timeLeft % INTERVAL;
+    // TODO test
+    const positionNumber = Math.floor(((expiryMilliSeconds - timeLeft) / INTERVAL) % 4) + 1;
 
     const handleUpdate = (positionNumber) => {
       dispatch(
         cycleSlice.actions.updateFocus({
           positionNumber,
           isRunning,
+          remainingCount,
         })
       );
     };
