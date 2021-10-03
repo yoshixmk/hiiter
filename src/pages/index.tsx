@@ -12,8 +12,6 @@ import { YoutubeVideoModal } from '../components/YoutubeVideoModal';
 import { Cycle, Focus } from '../store/cycle';
 import styles from '../styles/Home.module.css';
 
-
-
 export type Menu = {
   name: string;
   subtext: string;
@@ -91,7 +89,7 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
           />
         </a>
       </footer>
-      {/* <CountDownOverlay /> */}
+      <CountDownOverlay />
     </div>
   );
 }

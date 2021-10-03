@@ -31,11 +31,14 @@ export function Timer(): JSX.Element {
   const INTERVAL = 30;
   useEffect(() => {
     const timeLeft = seconds + 60 * minutes;
-    // time left in one training-set
-    const remainingCount = timeLeft % INTERVAL;
     // TODO test
     const positionNumber = Math.floor(((expiryMilliSeconds - timeLeft) / INTERVAL) % 4) + 1;
 
+    let remainingCount = null;
+    // should not show 0 when it first-time
+    if (expiryMilliSeconds / 1000 !== timeLeft) {
+      remainingCount = timeLeft % INTERVAL;
+    }
     const handleUpdate = (positionNumber) => {
       dispatch(
         cycleSlice.actions.updateFocus({

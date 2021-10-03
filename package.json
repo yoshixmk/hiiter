@@ -17,11 +17,13 @@
     "react-dom": "17.0.2",
     "react-icons": "4.2.0",
     "react-redux": "7.2.5",
-    "react-timer-hook": "3.0.5"
+    "react-timer-hook": "3.0.5",
+    "react-transition-group": "4.4.2"
   },
   "devDependencies": {
     "@types/react": "17.0.24",
     "@types/react-redux": "7.1.18",
+    "@types/react-transition-group": "4.4.3",
     "@typescript-eslint/eslint-plugin": "4.31.2",
     "@typescript-eslint/parser": "4.31.2",
     "eslint": "7.32.0",

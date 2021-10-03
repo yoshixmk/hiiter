@@ -127,6 +127,11 @@
   align-items: center;
 }
 
+.fade {
+  transition: opacity 300ms ease-in-out;
+  opacity: 0;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
