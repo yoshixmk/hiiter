@@ -30,7 +30,11 @@ export function Timer(): JSX.Element {
   const INTERVAL = 30;
   useEffect(() => {
     const timeLeft = seconds + 60 * minutes;
-    const positionNumber = getPositionNumber(expiryMilliSeconds / 1000, timeLeft, INTERVAL);
+    const positionNumber = getPositionNumber({
+      expirySeconds: expiryMilliSeconds / 1000,
+      timeLeft,
+      interval: INTERVAL
+    });
 
     let remainingCount = null;
     // should not show 0 when it first-time
@@ -90,7 +94,15 @@ export function Timer(): JSX.Element {
   );
 }
 
-export function getPositionNumber(expirySeconds: number, timeLeft: number, interval: number, separatorNum = 4): number {
+type PositionCalcParam = {
+  expirySeconds: number;
+  timeLeft: number;
+  interval: number;
+  separatorNum?: number;
+}
+export function getPositionNumber({
+  expirySeconds, timeLeft, interval, separatorNum = 4
+}: PositionCalcParam): number {
   return Math.floor(((expirySeconds - timeLeft) / interval) % separatorNum) + 1;
 }
 
