@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai';
 import { CgFormatSlash } from 'react-icons/cg';
@@ -31,8 +30,7 @@ export function Timer(): JSX.Element {
   const INTERVAL = 30;
   useEffect(() => {
     const timeLeft = seconds + 60 * minutes;
-    // TODO test
-    const positionNumber = Math.floor(((expiryMilliSeconds - timeLeft) / INTERVAL) % 4) + 1;
+    const positionNumber = getPositionNumber(expiryMilliSeconds / 1000, timeLeft, INTERVAL);
 
     let remainingCount = null;
     // should not show 0 when it first-time
@@ -91,3 +89,8 @@ export function Timer(): JSX.Element {
     </div>
   );
 }
+
+export function getPositionNumber(expirySeconds: number, timeLeft: number, interval: number, separatorNum = 4): number {
+  return Math.floor(((expirySeconds - timeLeft) / interval) % separatorNum) + 1;
+}
+
