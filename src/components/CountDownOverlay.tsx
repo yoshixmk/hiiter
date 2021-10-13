@@ -16,7 +16,7 @@ export const CountDownOverlay = (): JSX.Element => {
 
   return (
     <>
-      {[...Array(30).keys()].map((i) => (
+      {[...Array(11).keys()].map((i) => (
         <Transition key={i} in={isRunning && remainingCount === i} timeout={300}>
           {(state) => (
             <p style={{ ...transitionStyles[state] }} className={`${styles.fade} } ${styles.overlay}`}>

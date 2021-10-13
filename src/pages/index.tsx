@@ -89,7 +89,9 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
           />
         </a>
       </footer>
-      <CountDownOverlay />
+      {
+        isRunning && <CountDownOverlay />
+      }
     </div>
   );
 }
