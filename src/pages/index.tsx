@@ -11,6 +11,7 @@ import { Timer } from '../components/Timer';
 import { YoutubeVideoModal } from '../components/YoutubeVideoModal';
 import { Cycle, Focus } from '../store/cycle';
 import styles from '../styles/Home.module.css';
+import { menuSize } from '../utils/constant';
 
 export type Menu = {
   name: string;
@@ -58,7 +59,7 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
         </p>
 
         <div className={styles.grid}>
-          {[...Array(4).keys()].map((i) => (
+          {[...Array(menuSize).keys()].map((i) => (
             <div key={i} className={`${styles.card} ${positionNumber == i + 1 ? styles.highlight : {}}`}>
               <MenuSelect filteredMenus={filteredMenus} index={i} onSelect={onSelectMenu(i)} />
             </div>
@@ -89,9 +90,7 @@ export default function Home({ menus }: { menus: Menus }): JSX.Element {
           />
         </a>
       </footer>
-      {
-        isRunning && <CountDownOverlay />
-      }
+      {isRunning && <CountDownOverlay />}
     </div>
   );
 }

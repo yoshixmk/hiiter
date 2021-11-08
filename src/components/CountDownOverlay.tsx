@@ -3,6 +3,7 @@ import { Transition } from 'react-transition-group';
 
 import { Focus } from '../store/cycle';
 import styles from '../styles/Home.module.css';
+import { transitionTimeout, zeroToTen } from '../utils/constant';
 
 export const CountDownOverlay = (): JSX.Element => {
   const { remainingCount, isRunning } = useSelector((state: { focus: Focus }) => state.focus);
@@ -16,8 +17,8 @@ export const CountDownOverlay = (): JSX.Element => {
 
   return (
     <>
-      {[...Array(11).keys()].map((i) => (
-        <Transition key={i} in={isRunning && remainingCount === i} timeout={300}>
+      {[...Array(zeroToTen).keys()].map((i) => (
+        <Transition key={i} in={isRunning && remainingCount === i} timeout={transitionTimeout}>
           {(state) => (
             <p style={{ ...transitionStyles[state] }} className={`${styles.fade} } ${styles.overlay}`}>
               {i}

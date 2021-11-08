@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { cycleSlice } from 'store/cycle';
 
+import { maxTime, timerInterval } from '../utils/constant';
+
 export function Timer(): JSX.Element {
   const BASE_TIME = 240_000;
   const [expiryMilliSeconds, setExpiryMilliSeconds] = useState(BASE_TIME); // 4 minutes timer
@@ -27,19 +29,18 @@ export function Timer(): JSX.Element {
   });
 
   const dispatch = useDispatch();
-  const INTERVAL = 30;
   useEffect(() => {
     const timeLeft = seconds + 60 * minutes;
     const positionNumber = getPositionNumber({
       expirySeconds: expiryMilliSeconds / 1000,
       timeLeft,
-      interval: INTERVAL
+      interval: timerInterval,
     });
 
     let remainingCount = null;
     // should not show 0 when it first-time
     if (expiryMilliSeconds / 1000 !== timeLeft) {
-      remainingCount = timeLeft % INTERVAL;
+      remainingCount = timeLeft % timerInterval;
     }
     const handleUpdate = (positionNumber) => {
       dispatch(
@@ -54,7 +55,8 @@ export function Timer(): JSX.Element {
   }, [expiryMilliSeconds, minutes, seconds, dispatch, isRunning]);
 
   const leftFill = (num, targetLength = 2) => {
-    return num.toString().padStart(targetLength, 0);
+    // padding using '0'. ex: '1' -> '01'
+    return num.toString().padStart(targetLength, '0');
   };
 
   return (
@@ -85,7 +87,7 @@ export function Timer(): JSX.Element {
         size="3em"
         onClick={() => {
           const next = expiryMilliSeconds + BASE_TIME;
-          if (next >= 3600_000) return; // upper 1 hour
+          if (next >= maxTime) return;
           restart(new Date(new Date().getTime() + next), false);
           setExpiryMilliSeconds(next);
         }}
@@ -99,10 +101,7 @@ type PositionCalcParam = {
   timeLeft: number;
   interval: number;
   separatorNum?: number;
-}
-export function getPositionNumber({
-  expirySeconds, timeLeft, interval, separatorNum = 4
-}: PositionCalcParam): number {
+};
+export function getPositionNumber({ expirySeconds, timeLeft, interval, separatorNum = 4 }: PositionCalcParam): number {
   return Math.floor(((expirySeconds - timeLeft) / interval) % separatorNum) + 1;
 }
-
